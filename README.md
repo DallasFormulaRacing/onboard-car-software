@@ -18,4 +18,10 @@ After building, if you're in onboard-can-deserializer/build/, you can simply run
 ./onboard-can-deserializer
 ```
 
+## Cleaning
+If you need to clean up your build files (similar to `make clean` if a clean target is defined), simply remove the build directory:
+```sh
+rm -r build
+```
+and recreate it as necessary to build again.
 
