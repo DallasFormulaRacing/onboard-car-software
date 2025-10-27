@@ -3,10 +3,14 @@ services:
     image: redis:8.2.2 # using official redis image, version 8.2.2 for "stability"
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"] # starting redis with custom config
     volumes:
-      - ./docker/redis.conf:/usr/local/etc/redis/redis.conf # mounting the redis config from host
-      - ./docker/redis/data:/data # mounting directory from host to containers/data path
+      - ./docker/redis.conf:/usr/local/etc/redis/redis.conf:ro # mounting the redis config from host, read only
+      - redis-data:/data # named volume for data persistence
     ports:
       # the host (127.0.0.1) sends traffic through port 6379
       # which is bound to the containers port 6379
-      - "6379:6379"
+      - "127.0.0.1:6379:6379"
     restart: unless-stopped # restarts the container if it crashes
+
+volumes:
+    redis-data: # named volume for redis data persistence
+      driver: local
