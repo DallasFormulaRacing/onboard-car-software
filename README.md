@@ -12,3 +12,4 @@ This application continuously reads CAN bus data from automotive sensors and tra
 - Continuous sensor monitoring
 - Cloud telemetry delivery
 - Optimized for embedded systems
+

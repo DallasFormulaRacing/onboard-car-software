@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 
-
 #checking if vcan already exists, if not create one
 if ! ip link show vcan0 >/dev/null 2>&1; then
    echo "Loading vcan0 kernal module..."
@@ -22,12 +21,10 @@ if ! ip link show vcan0 >/dev/null 2>&1; then
 else
    echo "vcan0 already exists"
 
-
 fi
 echo "Verifying module loaded succesfully..."
 lsmod | grep vcan
 #output should be similar to: vcan         16384 0
 
-
 echo "Running app..."
-exec /app/build/onboard-can-deserializer
+exec /app/apps/deserializer/build/onboard-can-deserializer

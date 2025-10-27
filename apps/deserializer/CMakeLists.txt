@@ -5,9 +5,9 @@ set(CMAKE_CXX_STANDARD 20)
 
 
 include_directories(
-    include/libsockcanpp/include/exceptions/
-    include/libsockcanpp/include/can_errors/
-    include/libsockcanpp/include/
+    ../../libs/libsockcanpp/include/exceptions/
+    ../../libs/libsockcanpp/include/can_errors/
+    ../../libs/libsockcanpp/include/
 )
 
 add_executable(onboard-can-deserializer src/main.cpp)
@@ -21,7 +21,7 @@ if (NOT TARGET sockcanpp)
     # set(sockcanpp_CONCEPT_SUPPORT OFF CACHE BOOL "Force C++ standard back to 11")
 
     # add_subdirectory(${CMAKE_CURRENT_BUILD_DIR}/../lib/libsockcanpp ${CMAKE_CURRENT_BUILD_DIR}/libsockcanpp)
-    add_subdirectory(include/libsockcanpp)
+    add_subdirectory(../../libs/libsockcanpp ${CMAKE_CURRENT_BINARY_DIR}/libsockcanpp)
 endif()
 
 

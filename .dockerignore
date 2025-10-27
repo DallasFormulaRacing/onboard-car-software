@@ -1,0 +1,11 @@
+# Git
+.git
+.gitignore
+
+# Documentation
+*.md
+!README.md
+
+# Docker files
+.dockerignore
+docker-compose.yml
