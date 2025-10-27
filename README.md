@@ -1,27 +1,14 @@
-# Onboard CAN Deserializer
+# Onboard CAN Software
 
-A C++ program that works in tandem with a Python program and a Redis DB to deserialize and stream live CANbus data for the IC and EV.
+A telemetry pipeline for vehicle-mounted embedded systems.
 
-## Building
-This project uses CMake to build.
+## Overview
 
-```sh
-mkdir build
-cd build
-cmake ..
-cmake --build .
-```
+This application continuously reads CAN bus data from automotive sensors and transmits the telemetry to cloud infrastructure in real-time.
 
-## Running
-After building, if you're in onboard-can-deserializer/build/, you can simply run with:
-```sh
-./onboard-can-deserializer
-```
+## Features
 
-## Cleaning
-If you need to clean up your build files (similar to `make clean` if a clean target is defined), simply remove the build directory:
-```sh
-rm -r build
-```
-and recreate it as necessary to build again.
-
+- Real-time CAN bus data acquisition
+- Continuous sensor monitoring
+- Cloud telemetry delivery
+- Optimized for embedded systems
