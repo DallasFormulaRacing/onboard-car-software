@@ -1,3 +1,0 @@
-[submodule "include/libsockcanpp"]
-	path = include/libsockcanpp
-	url = https://github.com/SimonCahill/libsockcanpp.git
