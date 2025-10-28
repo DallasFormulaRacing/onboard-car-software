@@ -1,5 +1,6 @@
 services:
   deserializer:
+    container_name: deserializer
     build:
       context: . # build context is project root
       dockerfile: docker/deserializer.Dockerfile
@@ -10,6 +11,7 @@ services:
       - redis
 
   redis:
+    container_name: redis
     image: redis:8.2.2 # using official redis image, version 8.2.2 for "stability"
     command: ["redis-server", "/usr/local/etc/redis/redis.conf"] # starting redis with custom config
     volumes:
