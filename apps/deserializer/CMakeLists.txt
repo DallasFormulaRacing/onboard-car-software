@@ -35,6 +35,3 @@ add_compile_options(
     -Wpedantic
     -Wno-unknown-pragmas
 )
-
-
-
