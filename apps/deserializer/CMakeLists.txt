@@ -3,11 +3,14 @@ project(onboard-can-deserializer)
 
 set(CMAKE_CXX_STANDARD 20)
 
+# Enabling this allows to generate compile_commands.json, useful for clangd LSP support
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include_directories(
-    ../../libs/libsockcanpp/include/exceptions/
-    ../../libs/libsockcanpp/include/can_errors/
-    ../../libs/libsockcanpp/include/
+    #../../libs/libsockcanpp/include/exceptions/
+    #../../libs/libsockcanpp/include/can_errors/
+    # ../../libs/libsockcanpp/include/
+    ../../libs/
 )
 
 add_executable(onboard-can-deserializer src/main.cpp)
