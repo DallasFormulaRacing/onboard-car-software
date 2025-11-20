@@ -1,14 +1,38 @@
 services:
-  deserializer:
-    container_name: deserializer
-    build:
-      context: . # build context is project root
-      dockerfile: docker/deserializer.Dockerfile
-    privileged: true # required for forwarding CAN interface from host to container
-    network_mode: host # ^
-    restart: unless-stopped
-    depends_on:
-      - redis
+
+  # deserializer:
+  #   container_name: deserializer
+  #   build:
+  #     context: . # build context is project root
+  #     dockerfile: docker/deserializer.Dockerfile
+  #   privileged: true # required for forwarding CAN interface from host to container
+  #   network_mode: host # ^
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - redis
+
+    # TODO: Add the streamer service (Eshi)
+  streamer:
+    # TODO: Configure the build context and Dockerfile
+    # build:
+    #   context: .
+    #   dockerfile: apps/streamer/Dockerfile
+
+    # TODO: streamer depends on redis
+    # depends_on:
+    #   - redis
+
+    # TODO: Add relevant environment variables:
+    # environment:
+    #   - REDIS_URL=redis://redis:6379/0
+    #   - REDIS_STREAM_KEY=can:frames
+    #   - EVENTHUB_CONNECTION_STRING=${EVENTHUB_CONNECTION_STRING}
+    #   - EVENTHUB_NAME=${EVENTHUB_NAME}
+    #   - PRE_ROLL_SECONDS=5
+    #   - INACTIVE_GRACE_SECONDS=10
+
+    # TODO: restart policy
+    # restart: unless-stopped
 
   redis:
     container_name: redis
