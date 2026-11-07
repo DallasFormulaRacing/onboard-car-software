@@ -20,19 +20,18 @@ curl -LsSf https://astral.sh/uv/install.sh | sudo -H sh
     sudo /root/.local/bin/uv sync --locked
 )
 
-
 sudo mkdir -p data
 sudo chown redis:redis data
 
 sudo cp services/redis/redis.conf /etc/redis/redis.conf
 
 sudo mkdir -p /etc/systemd/system/redis-server.service.d
-sudo cp services/redis/override.conf /etc/systemd/system/redis-server.service.d
-sudo systemctl restart redis-server.service
+sudo cp services/redis/override.conf /etc/systemd/system/redis-server.service.d/
 
 sudo cp daemon/* /etc/systemd/system/
 sudo systemctl daemon-reload
 
 sudo systemctl enable redis-server.service slcan0.service deserializer.service
+sudo systemctl restart redis-server.service
 
-echo "INSTALLED!"
+echo -e "\nINSTALLED!"
