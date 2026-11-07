@@ -16,7 +16,7 @@ def main():
     args = p.parse_args()
 
     # Load all DBC files from directory
-    dbc_dir = os.environ.get("DBC_DIR", "/app/dbc-files")
+    dbc_dir = os.environ.get("DBC_DIR", "../../dbc-files")
     dbc_files = glob.glob(os.path.join(dbc_dir, "*.dbc"))
 
     db = cantools.database.Database()
@@ -32,8 +32,8 @@ def main():
     print(f"Listening on {args.interface}, loaded {len(dbc_files)} DBC file(s) from {dbc_dir}")
 
     # Connect to the Redis server via localhost (because this container is in host network mode)
-    # REDIS_PORT is exposed by docker-compose, default 6380
-    redis_port = int(os.environ.get("REDIS_PORT", "6380"))
+    # REDIS_PORT is exposed by docker-compose, default 6379
+    redis_port = int(os.environ.get("REDIS_PORT", "6379"))
     r = redis.Redis(decode_responses=True, host="localhost", port=redis_port)
     print(f"Connected to Redis on localhost:{redis_port}")
 
@@ -67,10 +67,10 @@ def main():
 
         r.xadd(name="decoded-can", fields=fields)
 
-        print(f"{sensor_name=}")
+        # print(f"{sensor_name=}")
 
-        for k, v in decoded.items():
-            print(f"\t{k=} {v=}")
+        # for k, v in decoded.items():
+        #     print(f"\t{k=} {v=}")
 
 
 if __name__ == "__main__":

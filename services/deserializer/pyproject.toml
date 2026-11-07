@@ -1,0 +1,9 @@
+[project]
+name = "deserializer"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "cantools>=45.1.2",
+    "python-can>=4.6.1",
+    "redis>=8.1.0",
+]

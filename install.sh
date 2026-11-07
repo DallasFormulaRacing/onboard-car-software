@@ -15,5 +15,3 @@ sudo apt-get install -y --no-install-recommends \
 
 uv venv
 uv pip install -r requirements.txt
-# TODO: use `uv run main.py`
-# TODO: make entrypoint use root

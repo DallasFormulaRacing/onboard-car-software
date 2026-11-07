@@ -14,3 +14,6 @@
 /.idea/onboard-car-software.iml
 /.idea/inspectionProfiles/profiles_settings.xml
 /.idea/vcs.xml
+
+/data/*
+/dbc-files/*

@@ -1,0 +1,19 @@
+[Unit]
+Description=Bring up CAN bus interface and start deserializer service
+After=network.target
+
+[Service]
+Type=simple
+# Run slcand
+ExecStart=/usr/bin/slcand -o -c -s5 /dev/serial/by-id/usb-Openlight_Labs_CANable2_b158aa7_github.com_normaldotcom_canable2.git_3670335A3036-if00 slcan0
+ExectStartPost=/bin/sleep 1
+# Once slcand attaches the device, immediately bring the link up
+ExecStartPost=/usr/sbin/ip link set slcan0 up
+# Then run the deserializer service
+ExecStartPost=/root/.local/bin/uv run /var/lib/onboard-car-software-dockerless/services/deserializer/main.py slcan0
+WorkingDirectory=/var/lib/onboard-car-software-dockerless/services/deserializer
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
