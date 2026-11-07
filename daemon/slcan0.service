@@ -1,0 +1,14 @@
+[Unit]
+Description=Initialize and monitor slcan0
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+ExecStart=/bin/bash /var/lib/onboard-car-software-dockerless/services/slcan/monitor-slcan0.sh
+Restart=always
+RestartSec=3
+KillMode=control-group
+TimeoutStopSec=5
+
+[Install]
+WantedBy=multi-user.target
