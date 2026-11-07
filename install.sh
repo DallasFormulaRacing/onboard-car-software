@@ -34,3 +34,5 @@ sudo cp daemon/* /etc/systemd/system/
 sudo systemctl daemon-reload
 
 sudo systemctl enable redis-server.service slcan0.service deserializer.service
+
+echo "INSTALLED!"
