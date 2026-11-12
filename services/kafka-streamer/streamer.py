@@ -1,11 +1,22 @@
 import redis
-
+from redis.exceptions import ResponseError
 
 # Set up Redis connection
 r = redis.Redis(host='localhost', port=6379, decode_responses=True)
 
 # Print number of messages in the stream
 print(f'{r.xlen('decoded-can')} messages in stream')
+
+# Create consumer group for this if it doesn't exist
+try:
+    r.xgroup_create(
+            'decoded-can', 
+            'streamer-group', 
+            id='0'
+    )
+except ResponseError as e:
+    if "BUSYGROUP" not in str(e):
+        raise
 
 # Get all the messages that our consumer received but didn't ack (will probably include unsent messages that we requested before crashing) and process them
 while (unacked_received := r.xreadgroup(
