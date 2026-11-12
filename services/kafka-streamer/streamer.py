@@ -8,28 +8,29 @@ r = redis.Redis(host='localhost', port=6379, decode_responses=True)
 print(f'{r.xlen('decoded-can')} messages in stream')
 
 # Get all the messages that our consumer received but didn't ack (will probably include unsent messages that we requested before crashing) and process them
-unacked_received = r.xreadgroup(
+while (unacked_received := r.xreadgroup(
     groupname='streamer-group',
     consumername='streamer',
-    streams={'decoded-can':"0"},
-    count=30,
-    block=2000
-)
-
-while unacked_received[0][1]:
+    streams={'decoded-can':'0'},
+    count=30
+)) and unacked_received[0][1]:
     print(f'unacked_received is NOT EMPTY!')
     for stream, message_list in unacked_received:
         for message_id, data in message_list:
             r.xack('decoded-can', 'streamer-group', message_id)
             print(f'acked {message_id}, {data}')
-    unacked_received = r.xreadgroup(
+
+# then work through unprocessed messages
+while True:
+    unprocessed_messages = r.xreadgroup(
         groupname='streamer-group',
         consumername='streamer',
-        streams={'decoded-can':"0"},
-        count=30,
-        block=2000
+        streams={'decoded-can':'>'},
+        count=30
     )
 
-
-print(f'\nunacked_received:')
+    for stream, message_list in unprocessed_messages:
+        for message_id, data in message_list:
+            r.xack('decoded-can', 'streamer-group', message_id)
+            print(f'acked {message_id}')
 
